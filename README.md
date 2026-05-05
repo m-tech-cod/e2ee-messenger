@@ -14,7 +14,7 @@ Chiffrement hybride : AES-GCM + RSA-OAEP. Les clés sont générées côté clie
 ## Installation et exécution en local
 
 ```bash
-git clone 
+git clone https://github.com/m-tech-cod/e2ee-messenger.git
 cd e2ee-messenger
 npm install
 npm run dev
@@ -191,7 +191,7 @@ Alice Backend Bob
 
 ## Auteur
 ALAYDE Malomon Araffath – HNG Internship 2026
-GitHub:https://github.com/m-tech-cod
+GitHub: https://github.com/m-tech-cod
 
 ---
 
