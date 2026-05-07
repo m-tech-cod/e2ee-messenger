@@ -1,20 +1,29 @@
 // src/lib/crypto.js
-function bufferToBase64(buffer) {
-  const bytes = new Uint8Array(buffer);
+
+// Conversion Uint8Array <-> base64 sans passer par btoa sur des chaînes
+function uint8ArrayToBase64(bytes) {
   let binary = '';
-  for (let i = 0; i < bytes.byteLength; i++) {
+  for (let i = 0; i < bytes.length; i++) {
     binary += String.fromCharCode(bytes[i]);
   }
   return btoa(binary);
 }
 
-function base64ToBuffer(base64) {
-  if (!base64 || typeof base64 !== 'string') throw new Error('Invalid base64');
-  const cleaned = base64.replace(/\s/g, '');
-  const binary = atob(cleaned);
+function base64ToUint8Array(base64) {
+  const binary = atob(base64);
   const bytes = new Uint8Array(binary.length);
-  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-  return bytes.buffer;
+  for (let i = 0; i < binary.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return bytes;
+}
+
+function bufferToBase64(buffer) {
+  return uint8ArrayToBase64(new Uint8Array(buffer));
+}
+
+function base64ToBuffer(base64) {
+  return base64ToUint8Array(base64).buffer;
 }
 
 async function importPublicKey(base64Key) {
@@ -32,7 +41,6 @@ export async function generateRSAKeyPair() {
 }
 
 export async function encryptMessageForRecipient(plaintext, recipientPublicKeyBase64, senderPublicKeyBase64) {
-  // Convertir le texte en UTF-8 (supporte les accents et emojis)
   const encoder = new TextEncoder();
   const plaintextBuffer = encoder.encode(plaintext);
   
