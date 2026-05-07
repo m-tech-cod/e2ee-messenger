@@ -28,7 +28,10 @@ export default function ConversationList({ onSelectConversation, selectedUserId 
           onClick={() => onSelectConversation(conv.user_id, conv.display_name)}
           className={`p-3 cursor-pointer hover:bg-gray-100 border-b ${selectedUserId === conv.user_id ? 'bg-blue-50' : ''}`}
         >
-          <div className="font-medium">{conv.display_name}</div>
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+            <div className="font-medium">{conv.display_name}</div>
+          </div>
           <div className="text-xs text-gray-400">@{conv.username}</div>
         </div>
       ))}
