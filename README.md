@@ -14,7 +14,7 @@ https://m-tech-cod-e2ee-messenger-zere.vercel.app/
 ## Installation et exécution en local
 
 ```bash
-git clone https://github.com/m-tech-cod/e2ee-messenger.git
+git clone https://github.com/m-tech-cod/e2ee-messenger
 cd e2ee-messenger
 npm install
 npm run dev
